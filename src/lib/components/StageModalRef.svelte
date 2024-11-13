@@ -1272,8 +1272,10 @@ let isSaveDisabled = false;
         confirmButtonText: 'OK'
       });
       return;
+    }else{
+      isSaveDisabled = true;
+      currentDC.isSaved = true;
     }
-    isSaveDisabled = true;
 
     // Clear notifications
     showLogisticsAlert = false;
@@ -1311,10 +1313,10 @@ let isSaveDisabled = false;
     if (!currentDC.isSaved) {
         currentDC.dcAmount = dcOrderTotal.subtotal;
     }
-     if (currentDC.isSaved) {
-    // Generate and download PDF after saving
-    generateAndDownloadPDF(currentDC);
-  }
+  //    if (currentDC.isSaved) {
+  //   // Generate and download PDF after saving
+  //   generateAndDownloadPDF(currentDC);
+  // }
     try {
       await fetch(`/submit-stage`, {
       method: 'POST',
@@ -1396,11 +1398,7 @@ let isSaveDisabled = false;
         icon: 'success',
         confirmButtonText: 'OK'
       });
-      }
-  function moveToMaterialToProcureStage() {
-  currentStage = 2; // Move to stage 2 (Material to Procure)
-  // You might want to perform any necessary initialization for stage 2 here
-}
+      } 
   }catch (error) {
         console.error('Error:', error);
         await Swal.fire({
@@ -3894,7 +3892,7 @@ function fillPreviousStagesData(data: any): { stage0Fetched: boolean, stage1Fetc
                     {/if}
                   </div>
                   
-              {#if dc.isSaved}
+              <!-- {#if dc.isSaved}
               <div class="mt-8">
                 <h4 class="text-lg font-bold mb-4">Line Items in this {dcOrderTotal.subtotal >= 50000 ? 'E-way Bill' : 'DC'}</h4>
                 <div class="overflow-x-auto bg-white shadow-md rounded-lg">
@@ -3930,7 +3928,7 @@ function fillPreviousStagesData(data: any): { stage0Fetched: boolean, stage1Fetc
                   </table>
                 </div>
               </div>
-              {/if}
+              {/if} -->
   
               {#if dc.isSaved}
                 <button 
